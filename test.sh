@@ -15,14 +15,14 @@ set -x
 while read line
 do
 
-  if [[ $line =~ ^#.* ]]
+  if [[ $line =~ ^#.* ]] # ignore comments
   then
     echo "comment ignored"
   else
-    if [ "$line" != "" ]
+    if [ "$line" != "" ] # ignore whitespaces
     then
       third=`echo $line | awk {' print $3 '}`
-      if [ "$third" != "d" ]
+      if [ "$third" != "d" ]            # ignore lines marked with 'd' sym.
       then
         utfcode=`echo $line | awk {' print $1 '}` 
         xsymcode=`echo $line | awk {' print $5 '}`
