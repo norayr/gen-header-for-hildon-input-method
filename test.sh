@@ -1,4 +1,4 @@
-
+wget -c https://www.cl.cam.ac.uk/~mgk25/ucs/keysymdef.h
 SRC="node-keysym/data/keysyms.txt"
 DST="out.h"
 TMPL0=template0.txt
@@ -6,6 +6,8 @@ TMPL1=template1.txt
 TMPL2=template2.txt
 TMPL3=template3.txt
 CLOSE="};"
+KEYSYM=keysymdef.h
+
 >$TMPL1
 >$TMPL2
 cat $TMPL0 > $DST
@@ -21,8 +23,13 @@ do
     then
        utfcode=`echo $line | awk {' print $1 '}` 
        xsymcode=`echo $line | awk {' print $5 '}`
-       echo "        ${utfcode}," >> $TMPL1
-       echo "        XK_${xsymcode}," >> $TMPL2
+       symcode="XK_${xsymcode}"
+       tst=`grep $symcode $KEYSYM`
+       if [ "$tst" != "" ]
+       then
+         echo "        ${utfcode}," >> $TMPL1
+         echo "        ${symcode}," >> $TMPL2
+       fi
     fi
   fi
   
