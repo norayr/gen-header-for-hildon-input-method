@@ -1,0 +1,3 @@
+
+const KeySym hildon_im_xsymcode[] =
+{

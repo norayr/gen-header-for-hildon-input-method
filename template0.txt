@@ -1,0 +1,5 @@
+#pragma once
+#include <X11/keysymdef.h>
+
+const gunichar hildon_im_utfcode[] =
+{
