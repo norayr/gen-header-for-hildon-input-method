@@ -21,15 +21,19 @@ do
   else
     if [ "$line" != "" ]
     then
-       utfcode=`echo $line | awk {' print $1 '}` 
-       xsymcode=`echo $line | awk {' print $5 '}`
-       symcode="XK_${xsymcode}"
-       tst=`grep $symcode $KEYSYM`
-       if [ "$tst" != "" ]
-       then
-         echo "        ${utfcode}," >> $TMPL1
-         echo "        ${symcode}," >> $TMPL2
-       fi
+      third=`echo $line | awk {' print $3 '}`
+      if [ "$third" != "d" ]
+      then
+        utfcode=`echo $line | awk {' print $1 '}` 
+        xsymcode=`echo $line | awk {' print $5 '}`
+        symcode="XK_${xsymcode}"
+        tst=`grep $symcode $KEYSYM`
+        if [ "$tst" != "" ]
+        then
+          echo "        ${utfcode}," >> $TMPL1
+          echo "        ${symcode}," >> $TMPL2
+        fi
+      fi
     fi
   fi
   
